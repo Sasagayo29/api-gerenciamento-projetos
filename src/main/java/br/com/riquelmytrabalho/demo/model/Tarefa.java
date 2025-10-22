@@ -1,14 +1,25 @@
 package br.com.riquelmytrabalho.demo.model;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -26,16 +37,15 @@ public class Tarefa {
     private String descricao;
 
     @NotNull(message = "O status é obrigatório")
-    @Enumerated(EnumType.STRING) // Grava o nome do Enum (ex: "PENDENTE") no DB
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusTarefa status;
 
     private LocalDate dataLimite;
 
-    // Relacionamento Muitos-para-Um
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projeto_id", nullable = false) // Define a coluna da FK
+    @JoinColumn(name = "projeto_id", nullable = false)
     @NotNull(message = "A tarefa deve estar associada a um projeto")
-    @JsonBackReference // Evita loop infinito ao serializar para JSON (este é o "filho")
+    @JsonBackReference
     private Projeto projeto;
 }

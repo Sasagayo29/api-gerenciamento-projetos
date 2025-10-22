@@ -1,41 +1,50 @@
 package br.com.riquelmytrabalho.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank; // Importa de 'jakarta'
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.List;
 
-@Data // Anotação do Lombok (cria Getters, Setters, equals, hashCode, toString)
-@NoArgsConstructor // Lombok (cria construtor vazio)
-@AllArgsConstructor // Lombok (cria construtor com todos os campos)
-@Entity // Marca esta classe como uma entidade JPA
-@Table(name = "projetos") // Define o nome da tabela no DB
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "projetos")
 public class Projeto {
 
-    @Id // Chave Primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Autoincremento
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome do projeto é obrigatório") // Validação
-    @Column(nullable = false) // Mapeamento da coluna (não pode ser nula)
+    @NotBlank(message = "O nome do projeto é obrigatório")
+    @Column(nullable = false)
     private String nome;
 
     private String descricao;
 
-    @Column(nullable = false, updatable = false) // Não pode ser nulo, não pode ser atualizado
+    @Column(nullable = false, updatable = false)
     private LocalDate dataCriacao;
 
-    // Relacionamento Um-para-Muitos
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference // Evita loop infinito ao serializar para JSON (este é o "pai")
+    @JsonManagedReference
     private List<Tarefa> tarefas;
 
-    @PrePersist // Método executado antes de salvar um novo projeto
+    @PrePersist
     protected void onCreate() {
         dataCriacao = LocalDate.now();
     }

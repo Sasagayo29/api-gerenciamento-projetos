@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.5.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>br.com.riquelmytrabalho</groupId>
     <artifactId>demo</artifactId>
@@ -52,10 +52,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- 
-            DEPENDÊNCIA FALTANTE (ADICIONADA AQUI)
-            Isto disponibiliza o Lombok para o seu projeto. 
-        -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -66,12 +62,6 @@
 
     <build>
         <plugins>
-            <!-- 
-                O plugin 'maven-compiler-plugin' que estava aqui foi removido
-                porque era desnecessário e estava quebrado. O 'spring-boot-starter-parent'
-                já configura o compilador corretamente para usar o Lombok
-                quando o encontra nas dependências.
-            -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
