@@ -58,69 +58,6 @@ API RESTful desenvolvida como parte de uma avaliação acadêmica, utilizando **
 ### 📁 1. Clonar o Repositório
 
 ```bash
-git clone https://github.com/Sasagayo29/api-gerenciamento-projetos.git
-cd demo
-```
-# 🛠️ API de Gerenciamento de Projetos e Tarefas
-
-API RESTful desenvolvida como parte de uma avaliação acadêmica, utilizando **Spring Boot**, **Spring Data JPA** e **MySQL** para gerenciar projetos e suas tarefas associadas.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-- Java 21  
-- Spring Boot 3.5.6  
-- Spring Data JPA (Hibernate)  
-- Spring Web (API RESTful)  
-- Spring Validation (Validação de entrada)  
-- MySQL (Banco de Dados Relacional)  
-- Lombok (Redução de boilerplate)  
-- Maven (Gerenciador de Dependências)  
-
----
-
-## 📋 Requisitos Funcionais (Endpoints)
-
-### 🔹 Endpoints de Projetos (`/api/projetos`)
-
-| Verbo HTTP | Endpoint              | Descrição                                  |
-|------------|-----------------------|--------------------------------------------|
-| POST       | `/api/projetos`       | Cria um novo projeto.                      |
-| GET        | `/api/projetos`       | Lista todos os projetos cadastrados.       |
-| GET        | `/api/projetos/{id}`  | Busca um projeto específico pelo seu ID.   |
-| PUT        | `/api/projetos/{id}`  | Atualiza os dados de um projeto existente. |
-| DELETE     | `/api/projetos/{id}`  | Remove um projeto e suas tarefas.          |
-
-### 🔹 Endpoints de Tarefas (`/api/tarefas`)
-
-| Verbo HTTP | Endpoint              | Descrição                                       |
-|------------|-----------------------|-------------------------------------------------|
-| POST       | `/api/tarefas`        | Cria uma nova tarefa (associada a um projeto).  |
-| GET        | `/api/tarefas`        | Lista todas as tarefas de todos os projetos.    |
-| GET        | `/api/tarefas/{id}`   | Busca uma tarefa específica pelo seu ID.        |
-| PUT        | `/api/tarefas/{id}`   | Atualiza os dados de uma tarefa existente.      |
-| DELETE     | `/api/tarefas/{id}`   | Remove uma tarefa.                              |
-
-### 🔹 Endpoint Adicional
-
-| Verbo HTTP | Endpoint                        | Descrição                                      |
-|------------|----------------------------------|------------------------------------------------|
-| GET        | `/api/projetos/{id}/tarefas`    | Lista todas as tarefas de um projeto específico.|
-
----
-
-## 🔧 Como Configurar e Executar Localmente
-
-### ✅ Pré-requisitos
-
-- JDK 21 (ou superior)  
-- Maven 3.x  
-- MySQL (rodando na porta 3306)
-
-### 📁 1. Clonar o Repositório
-
-```bash
 git clone [URL_DO_SEU_REPOSITORIO_AQUI]
 cd demo
 ```
