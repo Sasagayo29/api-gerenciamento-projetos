@@ -25,59 +25,29 @@ public class TarefaController {
     @Autowired
     private TarefaService tarefaService;
 
-    /**
-     * Endpoint: POST /api/tarefas
-     * Cria uma nova tarefa, associando-a a um projeto existente.
-     *
-     * Exemplo de JSON esperado:
-     * {
-     * "descricao": "Minha nova tarefa",
-     * "status": "PENDENTE",
-     * "dataLimite": "2025-12-31",
-     * "projeto": {
-     * "id": 1  <-- ID do projeto ao qual ela pertence
-     * }
-     * }
-     */
     @PostMapping
     public ResponseEntity<Tarefa> criarTarefa(@Valid @RequestBody Tarefa tarefa) {
         Tarefa novaTarefa = tarefaService.criar(tarefa);
         return new ResponseEntity<>(novaTarefa, HttpStatus.CREATED);
     }
 
-    /**
-     * Endpoint: GET /api/tarefas
-     * Lista todas as tarefas de todos os projetos.
-     */
     @GetMapping
     public List<Tarefa> listarTarefas() {
         return tarefaService.listarTodas();
     }
 
-    /**
-     * Endpoint: GET /api/tarefas/{id}
-     * Busca uma tarefa específica pelo id.
-     */
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
         Tarefa tarefa = tarefaService.buscarPorId(id);
         return ResponseEntity.ok(tarefa);
     }
 
-    /**
-     * Endpoint: PUT /api/tarefas/{id}
-     * Atualiza os dados de uma tarefa existente.
-     */
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Valid @RequestBody Tarefa tarefaDetalhes) {
         Tarefa tarefaAtualizada = tarefaService.atualizar(id, tarefaDetalhes);
         return ResponseEntity.ok(tarefaAtualizada);
     }
 
-    /**
-     * Endpoint: DELETE /api/tarefas/{id}
-     * Remove uma tarefa.
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
         tarefaService.deletar(id);
