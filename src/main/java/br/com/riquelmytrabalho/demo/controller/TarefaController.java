@@ -31,17 +31,29 @@ public class TarefaController {
         return new ResponseEntity<>(novaTarefa, HttpStatus.CREATED);
     }
 
+    /**
+     * Endpoint: GET /api/tarefas
+     * Lista todas as tarefas de todos os projetos.
+     */
     @GetMapping
     public List<Tarefa> listarTarefas() {
         return tarefaService.listarTodas();
     }
 
+    /**
+     * Endpoint: GET /api/tarefas/{id}
+     * Busca uma tarefa específica pelo id.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
         Tarefa tarefa = tarefaService.buscarPorId(id);
         return ResponseEntity.ok(tarefa);
     }
 
+    /**
+     * Endpoint: PUT /api/tarefas/{id}
+     * Atualiza os dados de uma tarefa existente.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Valid @RequestBody Tarefa tarefaDetalhes) {
         Tarefa tarefaAtualizada = tarefaService.atualizar(id, tarefaDetalhes);

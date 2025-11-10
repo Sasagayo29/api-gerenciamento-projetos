@@ -19,6 +19,12 @@ import br.com.riquelmytrabalho.demo.model.Tarefa;
 import br.com.riquelmytrabalho.demo.service.ProjetoService;
 import br.com.riquelmytrabalho.demo.service.TarefaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/projetos")
@@ -27,7 +33,7 @@ public class ProjetoController {
     @Autowired
     private ProjetoService projetoService;
 
-    @Autowired
+    @Autowired // Injeta o serviço de Tarefa (necessário para o endpoint extra)
     private TarefaService tarefaService;
 
     @PostMapping
@@ -58,8 +64,15 @@ public class ProjetoController {
         return ResponseEntity.noContent().build();
     }
 
+    // --- Endpoint de Consulta Adicional ---
+
+    /**
+     * Endpoint: GET /api/projetos/{id}/tarefas
+     * Lista todas as tarefas de um projeto específico.
+     */
     @GetMapping("/{id}/tarefas")
     public List<Tarefa> listarTarefasDoProjeto(@PathVariable Long id) {
         return tarefaService.buscarPorProjetoId(id);
     }
+}
 }
