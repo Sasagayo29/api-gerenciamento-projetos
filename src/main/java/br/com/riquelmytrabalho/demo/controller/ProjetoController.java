@@ -33,7 +33,7 @@ public class ProjetoController {
     @Autowired
     private ProjetoService projetoService;
 
-    @Autowired // Injeta o serviço de Tarefa (necessário para o endpoint extra)
+    @Autowired
     private TarefaService tarefaService;
 
     @PostMapping
@@ -64,12 +64,6 @@ public class ProjetoController {
         return ResponseEntity.noContent().build();
     }
 
-    // --- Endpoint de Consulta Adicional ---
-
-    /**
-     * Endpoint: GET /api/projetos/{id}/tarefas
-     * Lista todas as tarefas de um projeto específico.
-     */
     @GetMapping("/{id}/tarefas")
     public List<Tarefa> listarTarefasDoProjeto(@PathVariable Long id) {
         return tarefaService.buscarPorProjetoId(id);
